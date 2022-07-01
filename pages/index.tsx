@@ -119,7 +119,12 @@ const Home: NextPage = () => {
           </div>
 
           : <div>
-              {selectedFolder}
+              <button 
+              className="bg-blue-200"
+              onClick={() => setSelectedFolder(null)}>
+                Home
+              </button>
+              <p>{selectedFolder}</p>
               <div className="flex-grow grid grid-cols-2 justify-items-center pt-4 auto-rows-min gap-2 bg-green-100 w-2/3">
                 {
                   folders[selectedFolder].map(({ name, url }) => {
