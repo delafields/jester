@@ -7,7 +7,7 @@ type Inputs = {
   exampleRequired: string,
 };
 
-export const AddMemes = ({ test_memes, isOpen, setIsOpen, folders, setFolders }) => {
+export const AddMemes = ({ test_memes, isFolderModalOpen, setIsFolderModalOpen, folders, setFolders }) => {
 
     const [name, setName] = useState("");
 
@@ -21,13 +21,13 @@ export const AddMemes = ({ test_memes, isOpen, setIsOpen, folders, setFolders })
       }
     
       function closeModal() {
-        setIsOpen(false)
+        setIsFolderModalOpen(false)
         }
 
     return (
         <>
-            <Transition appear show={isOpen} as={Fragment}>
-              <Dialog as="div" className="relative z-10" open={isOpen} onClose={setIsOpen}>
+            <Transition appear show={isFolderModalOpen} as={Fragment}>
+              <Dialog as="div" className="relative z-10" open={isFolderModalOpen} onClose={setIsFolderModalOpen}>
                 <Transition.Child
                   as={Fragment}
                   enter="ease-out duration-300"
@@ -73,6 +73,10 @@ export const AddMemes = ({ test_memes, isOpen, setIsOpen, folders, setFolders })
                                             value: 255,
                                             message: "255 characters max"
                                         },
+                                        // pattern: {
+                                        //   value: /^[^\s^\x00-\x1f\\?*:"";<>|\/.][^\x00-\x1f\\?*:"";<>|\/]*[^\s^\x00-\x1f\\?*:"";<>|\/.]+$/g,
+                                        //   message: 'can\'t contain *\:"/><?| or start/end with . or a space'
+                                        // },
                                         // no duplicate folder names
                                         validate: newFolderName => folders.hasOwnProperty(newFolderName) === false
                                     })
@@ -81,7 +85,7 @@ export const AddMemes = ({ test_memes, isOpen, setIsOpen, folders, setFolders })
                             {errors.newFolderName?.type === "required" && <p className="text-red-200">can't be blank</p>}
                             {errors.newFolderName?.type === "maxLength" && <p className="text-red-200">255 characters max</p>}
                             {errors.newFolderName?.type === "validate" && <p className="text-red-200">duplicate folder name</p>}
-
+                            {/* {errors.newFolderName?.type === "pattern" && <p className="text-red-200">can't contain *\:"/><?| or start/end with . or a space</p>} */}
                             
                             <input 
                                 className="ml-2 bg-blue-200 p-2 rounded-xl"

@@ -5,7 +5,7 @@ import Link from "next/link";
 import styles from '../styles/Home.module.css'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
-import { AddMemes } from '../components/addMemes';
+import { AddMemes } from '../components/modals/addMemes';
 
 const Home: NextPage = () => {
   const test_memes =  {
@@ -40,11 +40,12 @@ const Home: NextPage = () => {
   }
 
   const [folders, setFolders] = useState(test_memes);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
   const [selectedFolder, setSelectedFolder] = useState(null);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   function openModal() {
-    setIsOpen(true)
+    setIsFolderModalOpen(true)
   }
 
   const Header = () => {
@@ -73,10 +74,10 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <div className="flex h-screen flex-col justify-center items-center">
+        <div className="flex bg-[#FFE9CE] h-screen flex-col justify-center items-center">
 
-          <div className="bg-gradient bg-cover flex justify-center items-center h-24 w-full">
-            <p className="font-berkshire text-white text-4xl">jester</p>
+          <div className="bg-cover flex justify-center items-center h-24 w-full">
+            <p className="font-berkshire text-black text-4xl">jester</p>
           </div>
 
           {selectedFolder === null
@@ -84,21 +85,15 @@ const Home: NextPage = () => {
             {
               Object.entries(folders).map(([foldername, memes]) => {
                 return (
-                  <div 
-                    className="bg-blue-200 w-24 h-24 items-center flex flex-col"
-                    key={foldername}>
-                      <p className="text-red-400 text-center">
-                        {foldername}
-                      </p>
-                      <button 
-                        // onDoubleClick={() => setSelectedFolder(foldername)}
+                      <div 
+                        key={foldername}
+                        className="cursor-pointer flex flex-col justify-end items-center w-24 h-24 bg-fictional-purple text-white font-berkshire rounded-xl"
                         onClick={ e => {
                           if (e.detail === 2) setSelectedFolder(foldername)
-                        }}
-                        className="bg-slate-200 flex-grow w-full">
-                        folder
-                      </button>
-                  </div>
+                        }}>
+                        <p className="text-4xl mb-1">😂</p>
+                        <p className="mb-1">{foldername}</p>
+                      </div>
                   )
               })
             }
@@ -110,33 +105,38 @@ const Home: NextPage = () => {
 
             <AddMemes 
               test_memes={test_memes} 
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
+              isFolderModalOpen={isFolderModalOpen}
+              setIsFolderModalOpen={setIsFolderModalOpen}
               folders={folders}
               setFolders={setFolders}
               />
 
           </div>
 
-          : <div>
-              <button 
-              className="bg-blue-200"
-              onClick={() => setSelectedFolder(null)}>
-                Home
-              </button>
-              <p>{selectedFolder}</p>
-              <div className="flex-grow grid grid-cols-2 justify-items-center pt-4 auto-rows-min gap-2 bg-green-100 w-2/3">
+          : <div className="flex-grow w-2/3 bg-green-100 p-6">
+              <div className="flex justify-center">
+                <button 
+                className="bg-blue-200 px-2 py-1 rounded-2xl font-black"
+                onClick={() => setSelectedFolder(null)}>
+                  home
+                </button>
+                <p className="text-2xl">{selectedFolder}</p>
+              </div>
+              <div className="grid grid-cols-2 w-full bg-red-100 justify-center pt-4 auto-rows-min gap-2 bg-green-100">
                 {
                   folders[selectedFolder].map(({ name, url }) => {
                     return (
-                      <div>
+                      <div className="flex flex-col w-48">
                         {name}
                         {/* {url} */}
                         <Image
                           src={url}
                           height={200}
                           width={200}
+                          onClick={() => setShowOverlay(true)}
+                          className="rounded-2xl"
                         />
+                        {showOverlay && <div className="targeting-box">box</div>}
                       </div>
                     )
                   })
