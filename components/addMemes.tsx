@@ -11,21 +11,6 @@ export const AddMemes = ({ test_memes, isOpen, setIsOpen, folders, setFolders })
 
     const [name, setName] = useState("");
 
-    // const handleSubmit = (event): string => {
-    //     event.preventDefault();
-
-    //     console.log(event.target.value)
-
-    //     let newFolders = folders;
-    //     newFolders[name] = [];
-    //     setFolders(newFolders);
-    //     closeModal();
-    //   }
-    
-    //   function closeModal() {
-    //     setIsOpen(false)
-    //   }
-
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = ({ newFolderName }): string => {
 

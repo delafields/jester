@@ -60,6 +60,10 @@ const Home: NextPage = () => {
     )
   }
 
+  const handleClick = (f) => {
+    setSelectedFolder(f);
+  };
+
   return (
     <div>
       <Head>
@@ -86,9 +90,14 @@ const Home: NextPage = () => {
                       <p className="text-red-400 text-center">
                         {foldername}
                       </p>
-                      <div className="bg-slate-200 flex-grow w-full">
+                      <button 
+                        // onDoubleClick={() => setSelectedFolder(foldername)}
+                        onClick={ e => {
+                          if (e.detail === 2) setSelectedFolder(foldername)
+                        }}
+                        className="bg-slate-200 flex-grow w-full">
                         folder
-                      </div>
+                      </button>
                   </div>
                   )
               })
@@ -110,7 +119,24 @@ const Home: NextPage = () => {
           </div>
 
           : <div>
-            {selectedFolder}
+              {selectedFolder}
+              <div className="flex-grow grid grid-cols-2 justify-items-center pt-4 auto-rows-min gap-2 bg-green-100 w-2/3">
+                {
+                  folders[selectedFolder].map(({ name, url }) => {
+                    return (
+                      <div>
+                        {name}
+                        {/* {url} */}
+                        <Image
+                          src={url}
+                          height={200}
+                          width={200}
+                        />
+                      </div>
+                    )
+                  })
+                }
+              </div>
             </div>
 
           }
