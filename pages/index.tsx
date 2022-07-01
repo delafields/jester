@@ -39,9 +39,9 @@ const Home: NextPage = () => {
     ]
   }
 
-  const [folders, setFolders] = useState(test_memes)
-  let [isOpen, setIsOpen] = useState(false)
-  const [name, setName] = useState("");
+  const [folders, setFolders] = useState(test_memes);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedFolder, setSelectedFolder] = useState(null);
 
   function openModal() {
     setIsOpen(true)
@@ -75,14 +75,14 @@ const Home: NextPage = () => {
             <p className="font-berkshire text-white text-4xl">jester</p>
           </div>
 
-          <div className="flex-grow grid grid-cols-2 justify-items-center pt-4 auto-rows-min gap-2 bg-green-100 w-2/3">
+          {selectedFolder === null
+          ? <div className="flex-grow grid grid-cols-2 justify-items-center pt-4 auto-rows-min gap-2 bg-green-100 w-2/3">
             {
               Object.entries(folders).map(([foldername, memes]) => {
                 return (
                   <div 
                     className="bg-blue-200 w-24 h-24 items-center flex flex-col"
-                    key={foldername} 
-                    memes={memes}>
+                    key={foldername}>
                       <p className="text-red-400 text-center">
                         {foldername}
                       </p>
@@ -105,11 +105,15 @@ const Home: NextPage = () => {
               setIsOpen={setIsOpen}
               folders={folders}
               setFolders={setFolders}
-              name={name}
-              setName={setName}
               />
 
           </div>
+
+          : <div>
+            {selectedFolder}
+            </div>
+
+          }
 
           <div className="bg-yellow-100 h-20 flex justify-center items-center w-full">
             made by me

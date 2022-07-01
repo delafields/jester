@@ -1,43 +1,24 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
-import { useForm, SubmitHandler } from "react-hook-form";
-
-type Inputs = {
-  example: string,
-  exampleRequired: string,
-};
 
 export const AddMemes = ({ test_memes, isOpen, setIsOpen, folders, setFolders }) => {
 
     const [name, setName] = useState("");
 
-    // const handleSubmit = (event): string => {
-    //     event.preventDefault();
+    const handleSubmit = (event): string => {
+        event.preventDefault();
 
-    //     console.log(event.target.value)
-
-    //     let newFolders = folders;
-    //     newFolders[name] = [];
-    //     setFolders(newFolders);
-    //     closeModal();
-    //   }
-    
-    //   function closeModal() {
-    //     setIsOpen(false)
-    //   }
-
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
-    const onSubmit: SubmitHandler<Inputs> = ({ newFolderName }): string => {
+        console.log(event.target.value)
 
         let newFolders = folders;
-        newFolders[newFolderName] = [];
+        newFolders[name] = [];
         setFolders(newFolders);
         closeModal();
       }
     
       function closeModal() {
         setIsOpen(false)
-        }
+      }
 
     return (
         <>
@@ -75,14 +56,16 @@ export const AddMemes = ({ test_memes, isOpen, setIsOpen, folders, setFolders })
                         </Dialog.Title>
 
                         <div className="mt-4 flex flex-col">
-                            {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
-                            <form onSubmit={handleSubmit(onSubmit)}>
-                            {/* register your input into the hook by invoking the "register" function */}
-                            <input placeholder="test" {...register("newFolderName")} />
-
-                            
+                          <form onSubmit={handleSubmit}>
+                            <input 
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                placeholder="name"
+                                className="text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"  
+                              />
                             <input type="submit" />
-                            </form>
+                          </form>
                           
                           {/* <button
                             type="button"
