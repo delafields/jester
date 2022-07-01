@@ -63,10 +63,29 @@ export const AddMemes = ({ test_memes, isOpen, setIsOpen, folders, setFolders })
                             {/* "handleSubmit" will validate your inputs before invoking "onSubmit" */}
                             <form onSubmit={handleSubmit(onSubmit)}>
                             {/* register your input into the hook by invoking the "register" function */}
-                            <input placeholder="test" {...register("newFolderName")} />
+                            <input
+                                className="pl-1" 
+                                placeholder="test" 
+                                {...register("newFolderName", 
+                                    {
+                                        required: "can't be blank",
+                                        maxLength: {
+                                            value: 255,
+                                            message: "255 characters max"
+                                        },
+                                        // no duplicate folder names
+                                        validate: newFolderName => folders.hasOwnProperty(newFolderName) === false
+                                    })
+                                } />
+                            {/* errors will return when field validation fails  */}
+                            {errors.newFolderName?.type === "required" && <p className="text-red-200">can't be blank</p>}
+                            {errors.newFolderName?.type === "maxLength" && <p className="text-red-200">255 characters max</p>}
+                            {errors.newFolderName?.type === "validate" && <p className="text-red-200">duplicate folder name</p>}
 
                             
-                            <input type="submit" />
+                            <input 
+                                className="ml-2 bg-blue-200 p-2 rounded-xl"
+                                type="submit" />
                             </form>
                           
                           {/* <button
