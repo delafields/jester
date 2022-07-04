@@ -7,7 +7,7 @@ type Inputs = {
   exampleRequired: string,
 };
 
-export const AddMemes = ({ test_memes, isFolderModalOpen, setIsFolderModalOpen, folders, setFolders }) => {
+export const AddMemes = ({ isFolderModalOpen, setIsFolderModalOpen, folders, setFolders }) => {
 
     const [name, setName] = useState("");
 

@@ -35,3 +35,11 @@ https://stackoverflow.com/questions/35491425/double-click-and-click-on-reactjs-c
 
 // RIGHT CLICKS
 https://stackoverflow.com/questions/31110184/react-synthetic-event-distinguish-left-and-right-click-events
+
+// design inspo
+https://www.theweirdos.com/
+https://fictional-typeface.com/
+
+// folder inspo
+https://cdn.dribbble.com/users/997070/screenshots/6668557/translator_and_folder_app_4x.png?compress=1&resize=400x300&vertical=top
+https://cdn.dribbble.com/users/4095861/screenshots/15116550/media/f81f0023250723cce25324ccb43d5cd9.jpg?compress=1&resize=400x300&vertical=top
