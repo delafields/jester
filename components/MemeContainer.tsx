@@ -1,10 +1,13 @@
 import Image from "next/image"
+import { FileUploader } from "react-drag-drop-files";
+const fileTypes = ["JPG", "PNG", "GIF"];
+// https://github.com/KarimMokhtar/react-drag-drop-files
 
 export const MemeContainer = ({ folders, selectedFolder, setSelectedFolder }) => {
 
     return (
         <div className="flex-grow w-2/3 bg-green-100 p-6">
-              <div className="flex justify-center">
+              <div className="flex align-around">
                 <button 
                 className="bg-blue-200 px-2 py-1 rounded-2xl font-black"
                 onClick={() => setSelectedFolder(null)}>

@@ -1,7 +1,7 @@
 // TODOs
-1. componentize
-2. style
-3. add fullstack functionality
+1. ~~componentize~~
+2. typescriptify
+4. add fullstack functionality
    1. auth
    2. wallet auth
    3. add/remove folders
@@ -11,8 +11,9 @@
       2. add/remove memes
    6. rename memes
    7. move memes
-4. add photo editor
-5. add minting
+5. style
+6. add photo editor
+7. add minting
 
 // gradient generator
 https://www.noiseandgradient.com/?chaos=0.1&colors=%23F5B925-%23ffffff&grain=0.1

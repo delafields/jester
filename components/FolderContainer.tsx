@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { AddMemes } from "./modals/addMemes"
+import { AddFolders } from "./modals/addFolders"
 
 export const FolderContainer = ({ folders, setFolders, setSelectedFolder }) => {
 
@@ -32,7 +32,7 @@ export const FolderContainer = ({ folders, setFolders, setSelectedFolder }) => {
               +
             </button>
 
-            <AddMemes 
+            <AddFolders 
               isFolderModalOpen={isFolderModalOpen}
               setIsFolderModalOpen={setIsFolderModalOpen}
               folders={folders}

@@ -12,7 +12,7 @@ type Inputs = {
   exampleRequired: string,
 };
 
-export const AddMemes = ({ isFolderModalOpen, setIsFolderModalOpen, folders, setFolders }) => {
+export const AddFolders = ({ isFolderModalOpen, setIsFolderModalOpen, folders, setFolders }) => {
 
     const [name, setName] = useState("");
     const [selectedEmoji, setSelectedEmoji] = useState("");
