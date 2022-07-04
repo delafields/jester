@@ -14,7 +14,7 @@ export const MemeContainer = ({ folders, selectedFolder, setSelectedFolder }) =>
               </div>
               <div className="grid grid-cols-2 bg-red-100 justify-center pt-4 auto-rows-min gap-2 bg-green-100">
                 {
-                  folders[selectedFolder].map(({ name, url }) => {
+                  folders[selectedFolder].memes.map(({ name, url }) => {
                     return (
                       <div className="flex flex-col w-48">
                         {name}
