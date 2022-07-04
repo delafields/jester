@@ -8,35 +8,44 @@ import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 
 const Home: NextPage = () => {
+
+
   const test_memes =  {
-    "funny": [
-      {
-        "name": "doggie",
-        "url": "https://media.giphy.com/media/GvEZr8EgoLGkCn2ZSS/giphy-downsized-large.gif"
-      },
-      {
-        "name": "bulldog",
-        "url": "https://media.giphy.com/media/kUzl3AEdxFplm2hV3Y/giphy-downsized-large.gif"
-      },
-      {
-        "name": "chihuahua",
-        "url": "https://media.giphy.com/media/oOkuKZEmTjDE2G3QIm/giphy.gif"
-      }
-    ],
-    "arsenal": [
-      {
-        "name": "wenger",
-        "url": "https://media.giphy.com/media/xUOwGm7QRxMQv52Q3m/giphy.gif"
-      },
-      {
-        "name": "scarf",
-        "url": "https://media.giphy.com/media/xUOwFUB0y0SDfaoEHS/giphy.gif"
-      },
-      {
-        "name": "tifo",
-        "url": "https://media.giphy.com/media/3oxQNnEZqBmN7z3Tnq/giphy.gif"
-      }
-    ]
+    "funny": {
+      "emoji": "😂",
+      "memes": [
+        {
+          "name": "doggie",
+          "url": "https://media.giphy.com/media/GvEZr8EgoLGkCn2ZSS/giphy-downsized-large.gif"
+        },
+        {
+          "name": "bulldog",
+          "url": "https://media.giphy.com/media/kUzl3AEdxFplm2hV3Y/giphy-downsized-large.gif"
+        },
+        {
+          "name": "chihuahua",
+          "url": "https://media.giphy.com/media/oOkuKZEmTjDE2G3QIm/giphy.gif"
+        }
+      ]
+    }
+    ,
+    "arsenal": {
+      "emoji": "😤",
+      "memes": [
+        {
+          "name": "wenger",
+          "url": "https://media.giphy.com/media/xUOwGm7QRxMQv52Q3m/giphy.gif"
+        },
+        {
+          "name": "scarf",
+          "url": "https://media.giphy.com/media/xUOwFUB0y0SDfaoEHS/giphy.gif"
+        },
+        {
+          "name": "tifo",
+          "url": "https://media.giphy.com/media/3oxQNnEZqBmN7z3Tnq/giphy.gif"
+        }
+      ]
+    }
   }
 
   const [folders, setFolders] = useState(test_memes);

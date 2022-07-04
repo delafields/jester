@@ -12,7 +12,7 @@ export const FolderContainer = ({ folders, setFolders, setSelectedFolder }) => {
     return (
         <div className="flex-grow grid grid-cols-2 justify-items-center pt-4 auto-rows-min gap-2 bg-green-100 w-2/3">
             {
-              Object.entries(folders).map(([foldername, memes]) => {
+              Object.entries(folders).map(([foldername, { emoji }]) => {
                 return (
                       <div 
                         key={foldername}
@@ -20,7 +20,7 @@ export const FolderContainer = ({ folders, setFolders, setSelectedFolder }) => {
                         onClick={ e => {
                           if (e.detail === 2) setSelectedFolder(foldername)
                         }}>
-                        <p className="text-4xl mb-1">😂</p>
+                        <p className="text-4xl mb-1">{emoji}</p>
                         <p className="mb-1">{foldername}</p>
                       </div>
                   )
