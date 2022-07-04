@@ -1,6 +1,11 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import { useForm, SubmitHandler } from "react-hook-form";
+import dynamic from "next/dynamic";
+
+const EmojiPicker = dynamic(() => import("../EmojiPicker"), {
+  ssr: false,
+});
 
 type Inputs = {
   example: string,
@@ -10,13 +15,14 @@ type Inputs = {
 export const AddMemes = ({ isFolderModalOpen, setIsFolderModalOpen, folders, setFolders }) => {
 
     const [name, setName] = useState("");
+    const [selectedEmoji, setSelectedEmoji] = useState("");
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
-    const onSubmit: SubmitHandler<Inputs> = ({ newFolderName }): string => {
-
+    const onSubmit: SubmitHandler<Inputs> = ({ newFolderName, emoji }): string => {
         let newFolders = folders;
-        newFolders[newFolderName] = [];
+        newFolders[newFolderName] = {"emoji": selectedEmoji, "memes": []};
         setFolders(newFolders);
+        setSelectedEmoji("");
         closeModal();
       }
     
@@ -65,7 +71,7 @@ export const AddMemes = ({ isFolderModalOpen, setIsFolderModalOpen, folders, set
                             {/* register your input into the hook by invoking the "register" function */}
                             <input
                                 className="pl-1" 
-                                placeholder="test" 
+                                placeholder="name" 
                                 {...register("newFolderName", 
                                     {
                                         required: "can't be blank",
@@ -73,10 +79,10 @@ export const AddMemes = ({ isFolderModalOpen, setIsFolderModalOpen, folders, set
                                             value: 255,
                                             message: "255 characters max"
                                         },
-                                        // pattern: {
-                                        //   value: /^[^\s^\x00-\x1f\\?*:"";<>|\/.][^\x00-\x1f\\?*:"";<>|\/]*[^\s^\x00-\x1f\\?*:"";<>|\/.]+$/g,
-                                        //   message: 'can\'t contain *\:"/><?| or start/end with . or a space'
-                                        // },
+                                        pattern: {
+                                          value: /^[^\s^\x00-\x1f\\?*:"";<>|\/.][^\x00-\x1f\\?*:"";<>|\/]*[^\s^\x00-\x1f\\?*:"";<>|\/.]+$/g,
+                                          message: 'can\'t contain *\:"/><?| or start/end with . or a space'
+                                        },
                                         // no duplicate folder names
                                         validate: newFolderName => folders.hasOwnProperty(newFolderName) === false
                                     })
@@ -85,7 +91,11 @@ export const AddMemes = ({ isFolderModalOpen, setIsFolderModalOpen, folders, set
                             {errors.newFolderName?.type === "required" && <p className="text-red-200">can't be blank</p>}
                             {errors.newFolderName?.type === "maxLength" && <p className="text-red-200">255 characters max</p>}
                             {errors.newFolderName?.type === "validate" && <p className="text-red-200">duplicate folder name</p>}
-                            {/* {errors.newFolderName?.type === "pattern" && <p className="text-red-200">can't contain *\:"/><?| or start/end with . or a space</p>} */}
+                            {errors.newFolderName?.type === "pattern" && <p className="text-red-200">must meet standard folder name patterns</p>}
+                      
+                            <input {...register("emoji", {required: true})} value={selectedEmoji || ""} />
+
+                            <EmojiPicker setSelectedEmoji={setSelectedEmoji} />
                             
                             <input 
                                 className="ml-2 bg-blue-200 p-2 rounded-xl"
