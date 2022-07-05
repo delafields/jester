@@ -3,7 +3,7 @@ import { FileUploader } from "react-drag-drop-files";
 const fileTypes = ["JPG", "PNG", "GIF"];
 // https://github.com/KarimMokhtar/react-drag-drop-files
 
-export const MemeContainer = ({ folders, selectedFolder, setSelectedFolder }) => {
+export const MemeView = ({ memes, selectedFolder, setSelectedFolder }) => {
 
     return (
         <div className="flex-grow w-2/3 bg-green-100 p-6">
@@ -17,7 +17,7 @@ export const MemeContainer = ({ folders, selectedFolder, setSelectedFolder }) =>
               </div>
               <div className="grid grid-cols-2 bg-red-100 justify-center pt-4 auto-rows-min gap-2 bg-green-100">
                 {
-                  folders[selectedFolder].memes.map(({ name, url }) => {
+                  memes[selectedFolder].memes.map(({ name, url }) => {
                     return (
                       <div className="flex flex-col w-48">
                         {name}

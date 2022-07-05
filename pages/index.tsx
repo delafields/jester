@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { useState } from 'react'
-import { FolderContainer } from '../components/FolderContainer';
-import { MemeContainer } from '../components/memeContainer';
+import { useState, useEffect } from 'react'
+import { ClientView } from '../components/views/ClientView';
+import { LandingView } from '../components/views/LandingView';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 
@@ -48,8 +48,8 @@ const Home: NextPage = () => {
     }
   }
 
-  const [folders, setFolders] = useState(test_memes);
-  const [selectedFolder, setSelectedFolder] = useState(null);
+  const [memes, setMemes] = useState(test_memes);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div>
@@ -64,18 +64,9 @@ const Home: NextPage = () => {
 
           <Header/>
 
-          {selectedFolder === null
-            ? <FolderContainer 
-                setSelectedFolder={setSelectedFolder}
-                folders={folders}
-                setFolders={setFolders} 
-              />
-
-            : <MemeContainer
-                folders={folders}
-                selectedFolder={selectedFolder}
-                setSelectedFolder={setSelectedFolder}
-              />
+          {isLoggedIn === true
+          ? <ClientView memes={memes} setMemes={setMemes}/>
+          : <LandingView isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
           }
 
           <Footer/>

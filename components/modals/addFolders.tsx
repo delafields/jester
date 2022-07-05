@@ -12,28 +12,28 @@ type Inputs = {
   exampleRequired: string,
 };
 
-export const AddFolders = ({ isFolderModalOpen, setIsFolderModalOpen, folders, setFolders }) => {
+export const AddFolders = ({ isAddFolderModalOpen, setIsAddFolderModalOpen, memes, setMemes }) => {
 
     const [name, setName] = useState("");
     const [selectedEmoji, setSelectedEmoji] = useState("");
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
     const onSubmit: SubmitHandler<Inputs> = ({ newFolderName, emoji }): string => {
-        let newFolders = folders;
+        let newFolders = memes;
         newFolders[newFolderName] = {"emoji": selectedEmoji, "memes": []};
-        setFolders(newFolders);
+        setMemes(newFolders);
         setSelectedEmoji("");
-        closeModal();
+        closeAddFolderModal();
       }
     
-      function closeModal() {
-        setIsFolderModalOpen(false)
+      function closeAddFolderModal() {
+        setIsAddFolderModalOpen(false)
         }
 
     return (
         <>
-            <Transition appear show={isFolderModalOpen} as={Fragment}>
-              <Dialog as="div" className="relative z-10" open={isFolderModalOpen} onClose={setIsFolderModalOpen}>
+            <Transition appear show={isAddFolderModalOpen} as={Fragment}>
+              <Dialog as="div" className="relative z-10" open={isAddFolderModalOpen} onClose={setIsAddFolderModalOpen}>
                 <Transition.Child
                   as={Fragment}
                   enter="ease-out duration-300"
@@ -84,7 +84,7 @@ export const AddFolders = ({ isFolderModalOpen, setIsFolderModalOpen, folders, s
                                           message: 'can\'t contain *\:"/><?| or start/end with . or a space'
                                         },
                                         // no duplicate folder names
-                                        validate: newFolderName => folders.hasOwnProperty(newFolderName) === false
+                                        validate: newFolderName => memes.hasOwnProperty(newFolderName) === false
                                     })
                                 } />
                             {/* errors will return when field validation fails  */}
@@ -105,7 +105,7 @@ export const AddFolders = ({ isFolderModalOpen, setIsFolderModalOpen, folders, s
                           {/* <button
                             type="button"
                             className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                            onClick={closeModal}
+                            onClick={closeAddFolderModal}
                           >
                             Got it, thanks!
                           </button> */}

@@ -1,18 +1,18 @@
 import { useState } from "react"
-import { AddFolders } from "./modals/addFolders"
+import { AddFolders } from "../modals/addFolders"
 
-export const FolderContainer = ({ folders, setFolders, setSelectedFolder }) => {
+export const FolderView = ({ memes, setMemes, setSelectedFolder }) => {
 
-    const [isFolderModalOpen, setIsFolderModalOpen] = useState(false);
+    const [isAddFolderModalOpen, setIsAddFolderModalOpen] = useState(false);
 
-    function openModal() {
-        setIsFolderModalOpen(true)
+    function openAddFolderModal() {
+        setIsAddFolderModalOpen(true)
       }
 
     return (
         <div className="flex-grow grid grid-cols-2 justify-items-center pt-4 auto-rows-min gap-2 bg-green-100 w-2/3">
             {
-              Object.entries(folders).map(([foldername, { emoji }]) => {
+              Object.entries(memes).map(([foldername, { emoji }]) => {
                 return (
                       <div 
                         key={foldername}
@@ -27,16 +27,16 @@ export const FolderContainer = ({ folders, setFolders, setSelectedFolder }) => {
               })
             }
             <button
-              onClick={openModal}
+              onClick={openAddFolderModal}
               className="w-24 h-24 bg-rose-500">
               +
             </button>
 
             <AddFolders 
-              isFolderModalOpen={isFolderModalOpen}
-              setIsFolderModalOpen={setIsFolderModalOpen}
-              folders={folders}
-              setFolders={setFolders}
+              isAddFolderModalOpen={isAddFolderModalOpen}
+              setIsAddFolderModalOpen={setIsAddFolderModalOpen}
+              memes={memes}
+              setMemes={setMemes}
               />
 
           </div>
